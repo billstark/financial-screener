@@ -1,0 +1,14 @@
+.search-filters {
+  margin-top: 40px;
+}
+
+.input-form-group {
+  margin-top: 60px;
+}
+
+.input-label {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
