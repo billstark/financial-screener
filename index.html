@@ -3,7 +3,7 @@
 <html>
   <head>
     <title>Financial Screener</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/filters.css">
   </head>
   <body>
@@ -42,12 +42,14 @@
       <div class="search-filters">
         <h2>Filters</h2>
         <form action="" class="input-form-group">
-          <div class="row mb-3">
+
+          <h4>Share Information</h4>
+          <div class="row mb-4">
             <!-- row one -->
             <div class="col-md-6">
               <div class="row">
                 <div class="col-md-4 input-label">
-                  <h5>Exchange </h5>
+                  <h5>Exchange</h5>
                 </div>
                 <div class="col-md-8">
                   <input type="text" class="form-control">
@@ -55,36 +57,29 @@
               </div>
               
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 country-section">
               <div class="row">
                 <div class="col-md-4 input-label">
-                  <h5>Country </h5>
+                  <h5>Country</h5>
                 </div>
                 <div class="col-md-8">
-                  <select class="form-control">
+                  <select class="form-control countries">
                     <option selected>Choose...</option>
-                    <option value="1">China</option>
-                    <option value="2">America</option>
-                    <option value="3">Japan</option>
                   </select>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="row mb-3">
-            <!-- row two -->
-          
-            <div class="col-md-6">
+          <div class="row mb-4">
+            <div class="col-md-6 sector-section">
               <div class="row">
                 <div class="col-md-4 input-label">
-                  <h5>Sector </h5>
+                  <h5>Sector</h5>
                 </div>
                 <div class="col-md-8">
-                  <select class="form-control">
+                  <select class="form-control sectors">
                     <option selected>Choose...</option>
-                    <option value="1">Health</option>
-                    <option value="2">Oil</option>
                   </select>
                 </div>
               </div>
@@ -95,13 +90,21 @@
                   <h5>Last Price</h5>
                 </div>
                 <div class="col-md-8">
-                  <input type="number" class="form-control">
+                  <div class="row">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                  
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="row mb-3">
+          <div class="row mb-4">
             <!-- row two -->
           
             <div class="col-md-6">
@@ -110,107 +113,53 @@
                   <h5>Market Cap</h5>
                 </div>
                 <div class="col-md-8">
-                  <input type="text" class="form-control">
+                  <div class="row">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
-              <div class="row">
-                <div class="col-md-4 input-label">
-                  <h5>P/E Ratio</h5>
-                </div>
-                <div class="col-md-8">
-                  <input type="number" class="form-control">
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row mb-3">
-            <!-- row two -->
-          
             <div class="col-md-6">
               <div class="row">
                 <div class="col-md-4 input-label">
                   <h5>Enterprise Value</h5>
                 </div>
                 <div class="col-md-8">
-                  <input type="number" class="form-control">
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="row">
-                <div class="col-md-4 input-label">
-                  <h5>EV/EBITDA Ratio</h5>
-                </div>
-                <div class="col-md-8">
-                  <input type="number" class="form-control">
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row mb-3">
-            <!-- row two -->
-          
-            <div class="col-md-6">
-              <div class="row">
-                <div class="col-md-4 input-label">
-                  <h5>EPS</h5>
-                </div>
-                <div class="col-md-8">
-                  <input type="number" class="form-control">
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="row">
-                <div class="col-md-4 input-label">
-                  <h5>EPS growth</h5>
-                </div>
-                <div class="col-md-8">
-                  <input type="number" class="form-control">
+                  <div class="row">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="row mb-3">
+          <div class="row mb-4">
             <!-- row two -->
           
-            <div class="col-md-6">
-              <div class="row">
-                <div class="col-md-4 input-label">
-                  <h5>Price/Book Ratio</h5>
-                </div>
-                <div class="col-md-8">
-                  <input type="number" class="form-control">
-                </div>
-              </div>
-            </div>
             <div class="col-md-6">
               <div class="row">
                 <div class="col-md-4 input-label">
                   <h5>Beta</h5>
                 </div>
                 <div class="col-md-8">
-                  <input type="number" class="form-control">
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row mb-3">
-            <!-- row two -->
-          
-            <div class="col-md-6">
-              <div class="row">
-                <div class="col-md-4 input-label">
-                  <h5>Dividend Yield</h5>
-                </div>
-                <div class="col-md-8">
-                  <input type="number" class="form-control">
+                  <div class="row">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
                 </div>
               </div>
             </div>
@@ -220,22 +169,134 @@
                   <h5>Volume</h5>
                 </div>
                 <div class="col-md-8">
-                  <input type="number" class="form-control">
+                  <div class="row">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="row mb-3">
+          <div class="row mb-4">
             <!-- row two -->
           
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 input-label">
+                  <h5>Dividend Yield (TTM)</h5>
+                </div>
+                <div class="col-md-8">
+                  <div class="row">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+             
+            </div>
+          </div>
+
+          <h4>Fundamentals</h4>
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 input-label">
+                  <h5>Basic Earnings per Share</h5>
+                </div>
+                <div class="col-md-8">
+                  <div class="row basiceps">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6 higher-val">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 input-label">
+                  <h5>Diluted Earnings per Share</h5>
+                </div>
+                <div class="col-md-8">
+                  <div class="row dilutedeps">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6 higher-val">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 input-label">
+                  <h5>EPS growth</h5>
+                </div>
+                <div class="col-md-8">
+                  <div class="row epsgrowth">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6 higher-val">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 input-label">
+                  <h5>Revenue Growth</h5>
+                </div>
+                <div class="col-md-8">
+                  <div class="row revenuegrowth">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6 higher-val">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-4">
             <div class="col-md-6">
               <div class="row">
                 <div class="col-md-4 input-label">
                   <h5>Return on Equity</h5>
                 </div>
                 <div class="col-md-8">
-                  <input type="number" class="form-control">
+                  <div class="row roe">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6 higher-val">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
                 </div>
               </div>
             </div>
@@ -245,21 +306,447 @@
                   <h5>Return on Assets</h5>
                 </div>
                 <div class="col-md-8">
-                  <input type="number" class="form-control">
+                  <div class="row roa">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6 higher-val">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
                 </div>
               </div>
             </div>
           </div>
 
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 input-label">
+                  <h5>Return on Invested Capital (ROIC)</h5>
+                </div>
+                <div class="col-md-8">
+                  <div class="row roic">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6 higher-val">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 input-label">
+                  <h5>Debt-to-Equity</h5>
+                </div>
+                <div class="col-md-8">
+                  <div class="row debttoequity">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6 higher-val">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 input-label">
+                  <h5>Gross Margin</h5>
+                </div>
+                <div class="col-md-8">
+                  <div class="row grossmargin">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6 higher-val">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 input-label">
+                  <h5>Operating Margin / EBIT Margin</h5>
+                </div>
+                <div class="col-md-8">
+                  <div class="row">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 input-label">
+                  <h5>EBITDA Margin</h5>
+                </div>
+                <div class="col-md-8">
+                  <div class="row ebitdamargin">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6 higher-val">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 input-label">
+                  <h5>Profit (Net Income) Margin</h5>
+                </div>
+                <div class="col-md-8">
+                  <div class="row profitmargin">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6 higher-val">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 input-label">
+                  <h5>Current Ratio</h5>
+                </div>
+                <div class="col-md-8">
+                  <div class="row currentratio">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6 higher-val">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 input-label">
+                  <h5>Quick Ratio</h5>
+                </div>
+                <div class="col-md-8">
+                  <div class="row quickratio">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6 higher-val">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 input-label">
+                  <h5>Free Cash Flow Firm Growth</h5>
+                </div>
+                <div class="col-md-8">
+                  <div class="row fcffgrowth">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6 higher-val">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h4>Valuation</h4>
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 input-label">
+                  <h5>Price to Earnings (P/E)</h5>
+                </div>
+                <div class="col-md-8">
+                  <div class="row">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 input-label">
+                  <h5>Price to Next Year Forecasted Earnings</h5>
+                </div>
+                <div class="col-md-8">
+                  <div class="row">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 input-label">
+                  <h5>Price to Revenue (P/Rev)</h5>
+                </div>
+                <div class="col-md-8">
+                  <div class="row">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 input-label">
+                  <h5>Price to Next Year Forecasted Revenue</h5>
+                </div>
+                <div class="col-md-8">
+                  <div class="row">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 input-label">
+                  <h5>PEG Ratio (No API - see formula in explanation)</h5>
+                </div>
+                <div class="col-md-8">
+                  <div class="row">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 input-label">
+                  <h5>Price to Book Value</h5>
+                </div>
+                <div class="col-md-8">
+                  <div class="row">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 input-label">
+                  <h5>Enterprise Value to EBIT (EV/EBIT)</h5>
+                </div>
+                <div class="col-md-8">
+                  <div class="row">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 input-label">
+                  <h5>Enterprise Value to EBITDA (EV/EBITDA)</h5>
+                </div>
+                <div class="col-md-8">
+                  <div class="row">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 input-label">
+                  <h5>Enterprise Value to Free Cash Flow (EV/FCFF)</h5>
+                </div>
+                <div class="col-md-8">
+                  <div class="row">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 input-label">
+                  <h5>Enterprise Value to Invested Capital (EV/IC)</h5>
+                </div>
+                <div class="col-md-8">
+                  <div class="row">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 input-label">
+                  <h5>Enterprise Value to NOPAT (EV/NOPAT)</h5>
+                </div>
+                <div class="col-md-8">
+                  <div class="row">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 input-label">
+                  <h5>Enterprise Value to Operating Cash Flow (EV/OCF)</h5>
+                </div>
+                <div class="col-md-8">
+                  <div class="row">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 input-label">
+                  <h5>Enterprise Value to Revenue (EV/Rev)</h5>
+                </div>
+                <div class="col-md-8">
+                  <div class="row">
+                    <div class="col-md-6 lower-val">
+                      <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <input type="number" class="form-control">
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="button-row row">
+            <button type="button" class="btn-lg btn-success filter-search-btn">Search</button>
+          </div>
+          
         </form>
       </div>
 
     </div>
     <div class="footer"></div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="./js/constants.js"></script>
+    <script src="./js/setup.js"></script>
+    <script src="./js/actions.js"></script>
 
   </body>
 </html>
