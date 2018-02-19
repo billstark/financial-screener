@@ -70,19 +70,47 @@ var sectors = [
   "Utilities"
 ];
 
+var share_filter_tags = [
+  ["Exchange", "stock_exchange"],
+  ["Country", "country"],
+  ["Sector", "sector"],
+  ["Last Price", "last_price"],
+  ["Market Cap", "marketcap"],
+  ["Enterprise Value", "enterprisevalue"],
+  ["Beta", "beta"],
+  ["Volume", "volume"],
+  ["Dividend Yield (TTM)", "dividendyield"]
+];
+
 var fundamental_filter_tags = [
-  "basiceps",
-  "dilutedeps",
-  "epsgrowth",
-  "revenuegrowth",
-  "roe",
-  "roa",
-  "roic",
-  "debttoequity",
-  "grossmargin",
-  "ebitdamargin",
-  "profitmargin",
-  "currentratio",
-  "quickratio",
-  "fcffgrowth"
+  ["Basic EPS", "basiceps"],
+  ["Diluted EPS", "dilutedeps"],
+  ["EPS growth", "epsgrowth"],
+  ["Revenue Growth", "revenuegrowth"],
+  ["ROE", "roe"],
+  ["ROA", "roa"],
+  ["ROIC", "roic"],
+  ["Debt-to-Equity", "debttoequity"],
+  ["Debt-to-EBITDA", "ltdebttoebitda"],
+  ["Gross Margin", "grossmargin"],
+  ["EBITDA Margin", "ebitdamargin"],
+  ["Net Income Margin", "profitmargin"],
+  ["Current Ratio", "currentratio"],
+  ["Quick Ratio", "quickratio"],
+  ["FCFF Growth", "fcffgrowth"]
+];
+
+var valuation_filter_tags = [
+  ["PE Ratio", "pricetoearnings"],
+  ["Forward PE Ratio", "pricetonextyearearnings"],
+  ["Price/Revenue", "pricetorevenue"],
+  ["Forward Price/Rev", "pricetonextyearrevenue"],
+  ["Price to Book Ratio", "pricetobook"],
+  ["EV/EBIT", "evtoebit"],
+  ["EV/EBITDA", "evtoebitda"],
+  ["EV/FCFF", "evtofcff"],
+  ["EV/Invested Capital", "evtoinvestedcapital"],
+  ["EV/NOPAT", "evtonopat"],
+  ["EV/Operating CF", "evtoocf"],
+  ["EV/Revenue", "evtorevenue"]
 ];

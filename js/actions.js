@@ -58,3 +58,18 @@ function parse_number_range_query(lower_val, higher_val, field) {
   if (higher_val) { result_array.push(field + "~lte~" + higher_val); }
   return result_array.join(",");
 }
+
+function append_numerical_filter(super_container, filter_tag, filter_name) {
+  var template = '<li class="row list-group-item filter-list-item ' + filter_tag + '">' + 
+  '<div class="col-md-5 form-input-label">' + '<p>' + filter_name + '</p></div>' +
+  '<div class="col-md-2">' + '<select class="form-control condition">' + 
+  '<option value="0">=</option>' +
+  '<option value="1">></option>' + 
+  '<option value="2">>=</option>' + 
+  '<option value="3"><</option>' + 
+  '<option value="4"><=</option>' +
+  '</select></div>' + '<div class="col-md-4"><input type="number" class="form-control"></div>' +
+  '<div class="col-md-1 filter-remove-btn">' + 
+  '<button class="btn-sm btn-danger">x</button></div></li>';
+  super_container.append(template);
+}
