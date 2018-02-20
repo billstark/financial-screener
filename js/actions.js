@@ -1,19 +1,20 @@
-var END_POINT = "https://api.intrinio.com/securities/search?conditions=";
+var SCREENER_END_POINT = "https://api.intrinio.com/securities/search?conditions=";
+var DATA_END_POINT = "https://api.intrinio.com/data_point?"
 var USER_NAME = "c14b322a4d960daf551ecf552c8ed84b";
 var PASS_WORD = "67344d263c0142633aa0ff8cb59a51d7";
 
 $(".filter-search-btn").click(function() {
-  var fundamental_data = get_fundamental_data();
+  var data = get_data();
   $.ajax({
     type: "GET",
-    url: END_POINT + fundamental_data,
+    url: SCREENER_END_POINT + data + "&page_size=15",
 
     beforeSend: function (xhr) {
       xhr.setRequestHeader ("Authorization", "Basic " + btoa(USER_NAME + ":" + PASS_WORD));
     },
 
     success: function(msg) {
-      console.log(msg);
+      get_display_data(msg.data);
     },
 
     error: function(request, status, error) {
@@ -22,19 +23,22 @@ $(".filter-search-btn").click(function() {
   })
 });
 
-function get_fundamental_data() {
+function get_data() {
   var result_array = []
-  for (var i = 0; i < fundamental_filter_tags.length; i++) {
-    var input_area = $("." + fundamental_filter_tags[i]);
-    
-    // error checking
+  var filters = $(".filter-list").children(".filter-list-item");
+  for (var i = 0; i < filters.length; i++) {
+    var filter = $(filters[i]);
+    if (!(filter.hasClass("country") || filter.hasClass("stock_exchange") || filter.hasClass("sector"))) {
+      var tag = filter.attr("filter-tag");
+      var condition = filter.find("select").val();
+      var value = filter.find("input").val();
+      result_array.push(tag + condition + value);
+      continue;
+    }
 
-    var parsed_term = parse_number_range_query(
-      get_lower_value(input_area), 
-      get_higher_value(input_area), 
-      fundamental_filter_tags[i]);
-    if (parsed_term == "") { continue; }
-    result_array.push(parsed_term);
+    var tag = filter.attr("filter-tag");
+    var value = filter.find("select").val();
+    result_array.push(tag + "~eq~" + value);
   }
 
   return result_array.join(",");
@@ -60,16 +64,135 @@ function parse_number_range_query(lower_val, higher_val, field) {
 }
 
 function append_numerical_filter(super_container, filter_tag, filter_name) {
-  var template = '<li class="row list-group-item filter-list-item ' + filter_tag + '">' + 
+  var template = '<li class="row list-group-item filter-list-item ' + filter_tag + '"' + 
+  ' filter-tag="' + filter_tag + '">' + 
   '<div class="col-md-5 form-input-label">' + '<p>' + filter_name + '</p></div>' +
   '<div class="col-md-2">' + '<select class="form-control condition">' + 
-  '<option value="0">=</option>' +
-  '<option value="1">></option>' + 
-  '<option value="2">>=</option>' + 
-  '<option value="3"><</option>' + 
-  '<option value="4"><=</option>' +
+  '<option value="~eq~">=</option>' +
+  '<option value="~gt~">></option>' + 
+  '<option value="~gte~">>=</option>' + 
+  '<option value="~lt~"><</option>' + 
+  '<option value="~lte~"><=</option>' +
   '</select></div>' + '<div class="col-md-4"><input type="number" class="form-control"></div>' +
   '<div class="col-md-1 filter-remove-btn">' + 
   '<button class="btn-sm btn-danger">x</button></div></li>';
   super_container.append(template);
+  super_container.find(".btn-danger").click(function() {
+    $($(this).parents(".filter-list-item")[0]).remove();
+  });
+}
+
+function append_selection_filter(super_container, filter_tag, filter_name) {
+  var template_before = '<li class="row list-group-item filter-list-item ' + filter_tag + 
+  '" filter-tag="' + filter_tag + '">' +  
+  '<div class="col-md-5 form-input-label">' + '<p>' + filter_name + '</p></div>' +
+  '<div class="col-md-2"></div>' + '<div class="col-md-4"><select class="form-control select">'
+
+  var template_after = '</select></div>' +
+  '<div class="col-md-1 filter-remove-btn">' + 
+  '<button class="btn-sm btn-danger">x</button></div></li>';
+
+  if (filter_name == "Country") {
+    for (var i = 0; i < countries.length; i++) {
+      template_before = template_before + "<option value='" + countries[i] + "'>" + countries[i] + "</option>";
+    }
+  }
+
+  if (filter_name == "Sector") {
+    for (var i = 0; i < sectors.length; i++) {
+      template_before = template_before + "<option value='" + sectors[i] + "'>" + sectors[i] + "</option>";
+    }
+  }
+
+  if (filter_name == "Exchange") {
+    for (var i = 0; i < exchanges.length; i++) {
+      template_before = template_before + "<option value='" + exchanges[i] + "'>" + exchanges[i] + "</option>";
+    }
+  }
+
+  var template = template_before + template_after
+  super_container.append(template);
+  super_container.find(".btn-danger").click(function() {
+    $($(this).parents(".filter-list-item")[0]).remove();
+  });
+}
+
+
+function setupCountries() {
+  for (var i = 0; i < countries.length; i++) {
+    $(".country").find(".select").append()
+  }
+}
+
+function setupSectors() {
+  for (var i = 0; i < sectors.length; i++) {
+    $(".sector").find(".select").append("<option value='" + i + "'>" + sectors[i] + "</option>")
+  }
+}
+
+function get_display_data(results) {
+  var tickers = [];
+  for (var i = 0; i < results.length; i++) {
+    tickers.push(results[i].ticker);
+  }
+
+  var identifier = tickers.join(",");
+  var items = "name,open_price,marketcap,stock_exchange,beta,pricetoearnings,roe,currentratio";
+  
+  var data_point_url = DATA_END_POINT + "identifier=" + identifier + "&item=" + items;
+  $.ajax({
+    type: "GET",
+    url: data_point_url,
+
+    beforeSend: function (xhr) {
+      xhr.setRequestHeader ("Authorization", "Basic " + btoa(USER_NAME + ":" + PASS_WORD));
+    },
+
+    success: function(msg) {
+      var sanitized_data = sanitize_data(msg.data, tickers);
+      display_result(sanitized_data);
+    },
+
+    error: function(request, status, error) {
+      console.log(error);
+    }
+  });
+}
+
+function sanitize_data(raw, tickers) {
+  var result = [];
+  for (var i = 0; i < tickers.length; i++) {
+    var ticker = tickers[i];
+    var display_data = {};
+    for (var j = 0; j < raw.length; j++) {
+      if (raw[j].identifier == ticker) {
+        display_data[raw[j].item] = raw[j].value;
+      }
+    }
+    result.push([ticker, display_data]);
+  }
+  return result;
+}
+
+function display_result(sanitized_data) {
+  var appended = "";
+  for (var i = 0; i < sanitized_data.length; i++) {
+    var template = '<li class="list-group-item result-list-item"><div class="row">';
+    var data = sanitized_data[i];
+    template = template + 
+    '<div class="col-md-1">' + (i + 1) + '</div>' +
+    '<div class="col-md-1">' + data[0] + '</div>' +
+    '<div class="col-md-2">' + data[1].name + '</div>' +
+    '<div class="col-md-1">' + data[1].open_price + '</div>' +
+    '<div class="col-md-1">' + data[1].marketcap + '</div>' +
+    '<div class="col-md-1">' + data[1].stock_exchange + '</div>' +
+    '<div class="col-md-1">' + data[1].beta + '</div>' +
+    '<div class="col-md-1">' + data[1].pricetoearnings + '</div>' +
+    '<div class="col-md-1">' + data[1].roe + '</div>' +
+    '<div class="col-md-1">' + data[1].currentratio + '</div>'
+    template = template + '</div></li>'
+    appended = appended + template;
+  }
+  $(".result-list-item").remove();
+  $(".result-list").append(appended);
 }

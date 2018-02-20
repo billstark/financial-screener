@@ -70,11 +70,16 @@ var sectors = [
   "Utilities"
 ];
 
+var exchanges = [
+  "NYSE",
+  "NYSE ARCA",
+  "NYSE MKT",
+];
+
 var share_filter_tags = [
   ["Exchange", "stock_exchange"],
   ["Country", "country"],
   ["Sector", "sector"],
-  ["Last Price", "last_price"],
   ["Market Cap", "marketcap"],
   ["Enterprise Value", "enterprisevalue"],
   ["Beta", "beta"],
