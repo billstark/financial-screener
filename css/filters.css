@@ -77,11 +77,13 @@
 .filter-list-item select {
   color: #fff!important;
   background: transparent!important;
+  font-size: 13px;
 }
 
 .filter-list-item input {
   color: #fff!important;
   background: transparent!important;
+  font-size: 13px;
 }
 
 .filter-remove-btn {

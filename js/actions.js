@@ -1,7 +1,9 @@
 var SCREENER_END_POINT = "https://api.intrinio.com/securities/search?conditions=";
 var DATA_END_POINT = "https://api.intrinio.com/data_point?"
-var USER_NAME = "c14b322a4d960daf551ecf552c8ed84b";
-var PASS_WORD = "67344d263c0142633aa0ff8cb59a51d7";
+// var USER_NAME = "c14b322a4d960daf551ecf552c8ed84b";
+// var PASS_WORD = "67344d263c0142633aa0ff8cb59a51d7";
+var USER_NAME = "19d217274ddc3a86810e31e6309562f1";
+var PASS_WORD = "17cd26d8fa01c6c71269471ae2653b39";
 
 $(".filter-search-btn").click(function() {
   var data = get_data();
@@ -14,7 +16,9 @@ $(".filter-search-btn").click(function() {
     },
 
     success: function(msg) {
-      get_display_data(msg.data);
+      if (msg.result_count != 0) {
+        get_display_data(msg.data);  
+      }
     },
 
     error: function(request, status, error) {
@@ -183,16 +187,61 @@ function display_result(sanitized_data) {
     '<div class="col-md-1">' + (i + 1) + '</div>' +
     '<div class="col-md-1">' + data[0] + '</div>' +
     '<div class="col-md-2">' + data[1].name + '</div>' +
-    '<div class="col-md-1">' + data[1].open_price + '</div>' +
-    '<div class="col-md-1">' + data[1].marketcap + '</div>' +
+    '<div class="col-md-1">' + get_price(data) + '</div>' +
+    '<div class="col-md-1">' + get_marketcap(data) + '</div>' +
     '<div class="col-md-1">' + data[1].stock_exchange + '</div>' +
-    '<div class="col-md-1">' + data[1].beta + '</div>' +
-    '<div class="col-md-1">' + data[1].pricetoearnings + '</div>' +
-    '<div class="col-md-1">' + data[1].roe + '</div>' +
-    '<div class="col-md-1">' + data[1].currentratio + '</div>'
+    '<div class="col-md-1">' + get_beta(data) + '</div>' +
+    '<div class="col-md-1">' + get_pe(data) + '</div>' +
+    '<div class="col-md-1">' + get_roe(data) + '</div>' +
+    '<div class="col-md-1">' + get_current_ratio(data) + '</div>'
     template = template + '</div></li>'
     appended = appended + template;
   }
   $(".result-list-item").remove();
   $(".result-list").append(appended);
+}
+
+function get_price(data) {
+  if (data[1].open_price != "na") {
+    return data[1].open_price + " USD";
+  }
+  return data[1].open_price;
+}
+
+function get_marketcap(data) {
+  if (data[1].marketcap != "nm") {
+    return (data[1].marketcap / 1000000000).toFixed(2) + "B";
+  }
+  return data[1].marketcap;
+}
+
+function get_beta(data) {
+  if (data[1].beta != undefined) {
+    return data[1].beta.toFixed(2);
+  }
+  if (data[1].three_yr_weekly_beta != undefined) {
+    return data[1].three_yr_weekly_beta.toFixed(2);
+  }
+  return "nm";
+}
+
+function get_pe(data) {
+  if (data[1].pricetoearnings != "nm") {
+    return data[1].pricetoearnings.toFixed(2);
+  }
+  return data[1].pricetoearnings;
+}
+
+function get_roe(data) {
+  if (data[1].pricetoearnings != "na") {
+    return (data[1].roe * 100).toFixed(2) + "%";
+  }
+  return data[1].roe;
+}
+
+function get_current_ratio(data) {
+  if (data[1].currentratio != "na") {
+    return (data[1].currentratio).toFixed(1);
+  }
+  return data[1].currentratio;
 }
