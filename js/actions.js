@@ -2,8 +2,11 @@ var SCREENER_END_POINT = "https://api.intrinio.com/securities/search?conditions=
 var DATA_END_POINT = "https://api.intrinio.com/data_point?"
 // var USER_NAME = "c14b322a4d960daf551ecf552c8ed84b";
 // var PASS_WORD = "67344d263c0142633aa0ff8cb59a51d7";
-var USER_NAME = "19d217274ddc3a86810e31e6309562f1";
-var PASS_WORD = "17cd26d8fa01c6c71269471ae2653b39";
+// var USER_NAME = "19d217274ddc3a86810e31e6309562f1";
+// var PASS_WORD = "17cd26d8fa01c6c71269471ae2653b39";
+var USER_NAME = "2411c63d180b6ca5e0881b730355032e";
+var PASS_WORD = "1112212e5f469c61ec9de5ee3ce6b16a";
+
 
 $(".filter-search-btn").click(function() {
   var data = get_data();
@@ -233,7 +236,7 @@ function get_pe(data) {
 }
 
 function get_roe(data) {
-  if (data[1].pricetoearnings != "na") {
+  if (data[1].roe != "na") {
     return (data[1].roe * 100).toFixed(2) + "%";
   }
   return data[1].roe;
