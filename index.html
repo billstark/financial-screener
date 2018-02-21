@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/filters.css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
   </head>
   <body>
 
@@ -89,7 +94,20 @@
         </div>
       </div>
 
-      <div class="search-result card text-white bg-dark">
+      <div class="row spinner hidden">
+        <i class="fas fa-circle-notch fa-spin"></i>
+      </div>
+
+      <div class="no-result card text-white bg-dark hidden">
+        <div class="card-header">
+          Search Result
+        </div>
+        <div class="card-body">
+          Sorry, there is no corresponding stock. Please try adjusting your filters.
+        </div>
+      </div>
+
+      <div class="search-result card text-white bg-dark hidden">
         <div class="card-header">
           Shortlisted Stocks
         </div>
@@ -113,9 +131,6 @@
     </div>
     <div class="footer"></div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="./js/constants.js"></script>
     <script src="./js/actions.js"></script>
     <script src="./js/setup.js"></script>

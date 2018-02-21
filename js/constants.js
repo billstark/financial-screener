@@ -1,9 +1,7 @@
 var countries = [
   "Argentina",
-  "Austria",
   "Australia",
   "Belgium",
-  "Bahrain",
   "Brazil",
   "Canada",
   "Switzerland",
@@ -28,7 +26,6 @@ var countries = [
   "Jordan",
   "Japan",
   "South Korea",
-  "Kuwait",
   "Sri Lanka",
   "Luxembourg",
   "Mexico",
@@ -41,7 +38,6 @@ var countries = [
   "Pakistan",
   "Poland",
   "Portugal",
-  "Qatar",
   "Russia",
   "Sweden",
   "Singapore",
@@ -51,8 +47,8 @@ var countries = [
   "Timor-Leste",
   "Tunisia",
   "Turkey",
-  "Taiwan",
-  "United States",
+  "Taiwan, Province Of China",
+  "United States of America",
   "Venezuela",
   "Vietnam",
   "South Africa"
@@ -71,9 +67,13 @@ var sectors = [
 ];
 
 var exchanges = [
+  "NasdaqCM",
+  "NasdaqGM",
+  "NasdaqGS",
   "NYSE",
   "NYSE ARCA",
   "NYSE MKT",
+  "OTC"
 ];
 
 var share_filter_tags = [

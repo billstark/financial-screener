@@ -75,15 +75,21 @@
 }
 
 .filter-list-item select {
-  color: #fff!important;
-  background: transparent!important;
+  /*color: #fff!important;*/
+  /*background: transparent!important;*/
   font-size: 13px;
 }
 
 .filter-list-item input {
-  color: #fff!important;
-  background: transparent!important;
+  /*color: #fff!important;*/
+  /*background: transparent!important;*/
   font-size: 13px;
+}
+
+.filter-list-item .col-md-4 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .filter-remove-btn {
@@ -117,4 +123,22 @@
 
 .search-result .result-list-item {
   background: transparent;
+}
+
+.spinner {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 2em;
+  color: #aaa;
+}
+
+.no-result {
+  margin-top: 30px;
+}
+
+.no-result .card-body {
+  font-weight: lighter;
+  font-size: 14px;
 }

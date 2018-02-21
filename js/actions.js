@@ -7,9 +7,26 @@ var DATA_END_POINT = "https://api.intrinio.com/data_point?"
 var USER_NAME = "2411c63d180b6ca5e0881b730355032e";
 var PASS_WORD = "1112212e5f469c61ec9de5ee3ce6b16a";
 
+function display(element) {
+  if (element.hasClass("hidden")) {
+    element.removeClass("hidden");
+  }
+  $('html, body').animate({
+    scrollTop: element.offset().top
+  }, 500);
+}
+
+function hide(element) {
+  if (!element.hasClass("hidden")) {
+    element.addClass("hidden");
+  }
+}
 
 $(".filter-search-btn").click(function() {
   var data = get_data();
+  hide($(".search-result"));
+  hide($(".no-result"));
+  display($(".spinner"));
   $.ajax({
     type: "GET",
     url: SCREENER_END_POINT + data + "&page_size=15",
@@ -19,9 +36,12 @@ $(".filter-search-btn").click(function() {
     },
 
     success: function(msg) {
-      if (msg.result_count != 0) {
-        get_display_data(msg.data);  
+      if (msg.result_count == 0) {
+        hide($(".spinner"));
+        display($(".no-result"));
+        return;
       }
+      get_display_data(msg.data);
     },
 
     error: function(request, status, error) {
@@ -82,7 +102,7 @@ function append_numerical_filter(super_container, filter_tag, filter_name) {
   '<option value="~lte~"><=</option>' +
   '</select></div>' + '<div class="col-md-4"><input type="number" class="form-control"></div>' +
   '<div class="col-md-1 filter-remove-btn">' + 
-  '<button class="btn-sm btn-danger">x</button></div></li>';
+  '<button class="btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button></div></li>';
   super_container.append(template);
   super_container.find(".btn-danger").click(function() {
     $($(this).parents(".filter-list-item")[0]).remove();
@@ -97,7 +117,7 @@ function append_selection_filter(super_container, filter_tag, filter_name) {
 
   var template_after = '</select></div>' +
   '<div class="col-md-1 filter-remove-btn">' + 
-  '<button class="btn-sm btn-danger">x</button></div></li>';
+  '<button class="btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button></div></li>';
 
   if (filter_name == "Country") {
     for (var i = 0; i < countries.length; i++) {
@@ -157,7 +177,9 @@ function get_display_data(results) {
 
     success: function(msg) {
       var sanitized_data = sanitize_data(msg.data, tickers);
+      hide($(".spinner"));
       display_result(sanitized_data);
+      display($(".search-result"));
     },
 
     error: function(request, status, error) {
