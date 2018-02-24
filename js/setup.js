@@ -20,6 +20,9 @@ function setup_fundamental_filter_tags() {
       append_numerical_filter($(".filter-list"), 
         $(this).attr("filter-tag"), $(this).text(), 
         $(this).attr("filter-unit"));
+      $(".alert-info")
+          .removeClass("hidden")
+          .html("<strong>Success!</strong> You have successfully added filter <strong>" + $(this).text() + "</strong>");
     });
   }
 }
@@ -38,6 +41,9 @@ function setup_share_info_filter_tags() {
       share_filter_tags[i][0] == "Sector") {
       $(".share-info ." + share_filter_tags[i][1]).click(function() {
         append_selection_filter($(".filter-list"), $(this).attr("filter-tag"), $(this).text());
+        $(".alert-info")
+          .removeClass("hidden")
+          .html("<strong>Success!</strong> You have successfully added filter <strong>" + $(this).text() + "</strong>");
       });
       continue;
     }
@@ -45,6 +51,9 @@ function setup_share_info_filter_tags() {
       append_numerical_filter($(".filter-list"), 
         $(this).attr("filter-tag"), $(this).text(), 
         $(this).attr("filter-unit"));
+      $(".alert-info")
+          .removeClass("hidden")
+          .html("<strong>Success!</strong> You have successfully added filter <strong>" + $(this).text() + "</strong>");
     });
   }
 }
@@ -62,6 +71,9 @@ function setup_valuation_filter_tags() {
       append_numerical_filter($(".filter-list"), 
         $(this).attr("filter-tag"), $(this).text(), 
         $(this).attr("filter-unit"));
+      $(".alert-info")
+          .removeClass("hidden")
+          .html("<strong>Success!</strong> You have successfully added filter <strong>" + $(this).text() + "</strong>");
     });
   }
 }
