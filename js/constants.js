@@ -77,45 +77,45 @@ var exchanges = [
 ];
 
 var share_filter_tags = [
-  ["Exchange", "stock_exchange"],
-  ["Country", "country"],
-  ["Sector", "sector"],
-  ["Market Cap", "marketcap"],
-  ["Enterprise Value", "enterprisevalue"],
-  ["Beta", "beta"],
-  ["Volume", "volume"],
-  ["Dividend Yield (TTM)", "dividendyield"]
+  ["Exchange", "stock_exchange", ""],
+  ["Country", "country", ""],
+  ["Sector", "sector", ""],
+  ["Market Cap", "marketcap", "USD(mn)"],
+  ["Enterprise Value", "enterprisevalue", "USD(mn)"],
+  ["Beta", "beta", ""],
+  ["Volume", "volume", "mn"],
+  ["Dividend Yield (TTM)", "dividendyield", "%"]
 ];
 
 var fundamental_filter_tags = [
-  ["Basic EPS", "basiceps"],
-  ["Diluted EPS", "dilutedeps"],
-  ["EPS growth", "epsgrowth"],
-  ["Revenue Growth", "revenuegrowth"],
-  ["ROE", "roe"],
-  ["ROA", "roa"],
-  ["ROIC", "roic"],
-  ["Debt-to-Equity", "debttoequity"],
-  ["Debt-to-EBITDA", "ltdebttoebitda"],
-  ["Gross Margin", "grossmargin"],
+  ["Basic EPS", "basiceps", "USD"],
+  ["Diluted EPS", "dilutedeps", "USD"],
+  ["EPS growth", "epsgrowth", "%"],
+  ["Revenue Growth", "revenuegrowth", "%"],
+  ["ROE", "roe", "%"],
+  ["ROA", "roa", "%"],
+  ["ROIC", "roic", "%"],
+  ["Debt-to-Equity", "debttoequity", "%"],
+  ["Debt-to-EBITDA", "ltdebttoebitda", "%"],
+  ["Gross Margin", "grossmargin", "%"],
   ["EBITDA Margin", "ebitdamargin"],
-  ["Net Income Margin", "profitmargin"],
-  ["Current Ratio", "currentratio"],
-  ["Quick Ratio", "quickratio"],
-  ["FCFF Growth", "fcffgrowth"]
+  ["Net Income Margin", "profitmargin", "%"],
+  ["Current Ratio", "currentratio", "x"],
+  ["Quick Ratio", "quickratio", "x"],
+  ["FCFF Growth", "fcffgrowth", "%"]
 ];
 
 var valuation_filter_tags = [
-  ["PE Ratio", "pricetoearnings"],
-  ["Forward PE Ratio", "pricetonextyearearnings"],
-  ["Price/Revenue", "pricetorevenue"],
-  ["Forward Price/Rev", "pricetonextyearrevenue"],
-  ["Price to Book Ratio", "pricetobook"],
-  ["EV/EBIT", "evtoebit"],
-  ["EV/EBITDA", "evtoebitda"],
-  ["EV/FCFF", "evtofcff"],
-  ["EV/Invested Capital", "evtoinvestedcapital"],
-  ["EV/NOPAT", "evtonopat"],
-  ["EV/Operating CF", "evtoocf"],
-  ["EV/Revenue", "evtorevenue"]
+  ["PE Ratio", "pricetoearnings", "x"],
+  ["Forward PE Ratio", "pricetonextyearearnings", "x"],
+  ["Price/Revenue", "pricetorevenue", "x"],
+  ["Forward Price/Rev", "pricetonextyearrevenue", "x"],
+  ["Price to Book Ratio", "pricetobook", "x"],
+  ["EV/EBIT", "evtoebit", "x"],
+  ["EV/EBITDA", "evtoebitda", "x"],
+  ["EV/FCFF", "evtofcff", "x"],
+  ["EV/Invested Capital", "evtoinvestedcapital", "x"],
+  ["EV/NOPAT", "evtonopat", "x"],
+  ["EV/Operating CF", "evtoocf", "x"],
+  ["EV/Revenue", "evtorevenue", "x"]
 ];

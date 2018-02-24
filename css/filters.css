@@ -142,3 +142,25 @@
   font-weight: lighter;
   font-size: 14px;
 }
+
+.filter-unit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+.filter-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.result-row {
+  justify-content: space-around;
+}
+
+.result-titles {
+  justify-content: space-around;
+}

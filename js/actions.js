@@ -29,7 +29,7 @@ $(".filter-search-btn").click(function() {
   display($(".spinner"));
   $.ajax({
     type: "GET",
-    url: SCREENER_END_POINT + data + "&page_size=15",
+    url: SCREENER_END_POINT + data[0] + "&page_size=15",
 
     beforeSend: function (xhr) {
       xhr.setRequestHeader ("Authorization", "Basic " + btoa(USER_NAME + ":" + PASS_WORD));
@@ -41,17 +41,20 @@ $(".filter-search-btn").click(function() {
         display($(".no-result"));
         return;
       }
-      get_display_data(msg.data);
+      get_display_data(msg.data, data[1], data[2], data[3]);
     },
 
     error: function(request, status, error) {
       console.log(error);
     }
-  })
+  });
 });
 
 function get_data() {
-  var result_array = []
+  var result_array = [];
+  var extra_filters = [];
+  var filter_names = [];
+  var units = [];
   var filters = $(".filter-list").children(".filter-list-item");
   for (var i = 0; i < filters.length; i++) {
     var filter = $(filters[i]);
@@ -59,16 +62,34 @@ function get_data() {
       var tag = filter.attr("filter-tag");
       var condition = filter.find("select").val();
       var value = filter.find("input").val();
+      var unit = filter.attr("filter-unit");
+
+      if (unit == "%") {
+        value = value / 100;
+      }
+
+      if (unit == "USD(mn)" || unit == "mn") {
+        value = value * 1000000;
+      }
       result_array.push(tag + condition + value);
+      if (tag != "name" && tag != "pricetoearnings" && tag != "marketcap" && extra_filters.indexOf(tag) == -1) {
+        extra_filters.push(tag);
+        units.push(unit);
+        filter_names.push(filter.find("p").text());
+      }
       continue;
     }
 
     var tag = filter.attr("filter-tag");
     var value = filter.find("select").val();
     result_array.push(tag + "~eq~" + value);
+    if (tag != "name" && tag != "pricetoearnings" && tag != "marketcap" && extra_filters.indexOf(tag) == -1) {
+      extra_filters.push(tag);
+      filter_names.push(filter.find("p").text());
+    }
   }
 
-  return result_array.join(",");
+  return [result_array.join(","), extra_filters, units, filter_names];
 }
 
 function get_lower_value(input_area) {
@@ -90,9 +111,10 @@ function parse_number_range_query(lower_val, higher_val, field) {
   return result_array.join(",");
 }
 
-function append_numerical_filter(super_container, filter_tag, filter_name) {
+function append_numerical_filter(super_container, filter_tag, filter_name, filter_unit) {
   var template = '<li class="row list-group-item filter-list-item ' + filter_tag + '"' + 
-  ' filter-tag="' + filter_tag + '">' + 
+  ' filter-tag="' + filter_tag + 
+  '" filter-unit="' + filter_unit + '">' + 
   '<div class="col-md-5 form-input-label">' + '<p>' + filter_name + '</p></div>' +
   '<div class="col-md-2">' + '<select class="form-control condition">' + 
   '<option value="~eq~">=</option>' +
@@ -100,7 +122,8 @@ function append_numerical_filter(super_container, filter_tag, filter_name) {
   '<option value="~gte~">>=</option>' + 
   '<option value="~lt~"><</option>' + 
   '<option value="~lte~"><=</option>' +
-  '</select></div>' + '<div class="col-md-4"><input type="number" class="form-control"></div>' +
+  '</select></div>' + '<div class="col-md-3 filter-input"><input type="number" class="form-control"></div>' +
+  '<div class="col-md-1 filter-unit">' + filter_unit + '</div>' +
   '<div class="col-md-1 filter-remove-btn">' + 
   '<button class="btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button></div></li>';
   super_container.append(template);
@@ -113,9 +136,9 @@ function append_selection_filter(super_container, filter_tag, filter_name) {
   var template_before = '<li class="row list-group-item filter-list-item ' + filter_tag + 
   '" filter-tag="' + filter_tag + '">' +  
   '<div class="col-md-5 form-input-label">' + '<p>' + filter_name + '</p></div>' +
-  '<div class="col-md-2"></div>' + '<div class="col-md-4"><select class="form-control select">'
+  '<div class="col-md-2"></div>' + '<div class="col-md-3 filter-input"><select class="form-control select">';
 
-  var template_after = '</select></div>' +
+  var template_after = '</select></div>' + '<div class="col-md-1"></div>' +
   '<div class="col-md-1 filter-remove-btn">' + 
   '<button class="btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button></div></li>';
 
@@ -157,16 +180,24 @@ function setupSectors() {
   }
 }
 
-function get_display_data(results) {
+function get_display_data(results, extra_filters, extra_units, extra_filter_names) {
   var tickers = [];
   for (var i = 0; i < results.length; i++) {
     tickers.push(results[i].ticker);
   }
 
   var identifier = tickers.join(",");
-  var items = "name,open_price,marketcap,stock_exchange,beta,pricetoearnings,roe,currentratio";
+  var default_items = ["name", "marketcap", "pricetoearnings"];
+  var default_units = ["", "USD(mn)", "x"];
+  var default_fitler_names = ["#", "Ticker", "Stock Name", "Market Cap", "P/E Ratio"]
+  var items = default_items.concat(extra_filters);
+  var units = default_units.concat(extra_units);
+  var names = default_fitler_names.concat(extra_filter_names);
+
+  // var items = "name,open_price,marketcap,stock_exchange,beta,pricetoearnings,roe,currentratio";
   
-  var data_point_url = DATA_END_POINT + "identifier=" + identifier + "&item=" + items;
+  var data_point_url = DATA_END_POINT + "identifier=" + identifier + "&item=" + items.join(",");
+
   $.ajax({
     type: "GET",
     url: data_point_url,
@@ -178,7 +209,7 @@ function get_display_data(results) {
     success: function(msg) {
       var sanitized_data = sanitize_data(msg.data, tickers);
       hide($(".spinner"));
-      display_result(sanitized_data);
+      display_result(sanitized_data, items, units, names);
       display($(".search-result"));
     },
 
@@ -203,22 +234,22 @@ function sanitize_data(raw, tickers) {
   return result;
 }
 
-function display_result(sanitized_data) {
+function display_result(sanitized_data, filters, units, names) {
   var appended = "";
+  $(".result-titles").children("div").remove();
+  for (var i = 0; i < names.length; i++) {
+    $(".result-titles").append('<div class="col-md-1">' + names[i] + '</div>');
+  }
   for (var i = 0; i < sanitized_data.length; i++) {
-    var template = '<li class="list-group-item result-list-item"><div class="row">';
+    var template = '<li class="list-group-item result-list-item"><div class="row result-row">';
     var data = sanitized_data[i];
-    template = template + 
-    '<div class="col-md-1">' + (i + 1) + '</div>' +
-    '<div class="col-md-1">' + data[0] + '</div>' +
-    '<div class="col-md-2">' + data[1].name + '</div>' +
-    '<div class="col-md-1">' + get_price(data) + '</div>' +
-    '<div class="col-md-1">' + get_marketcap(data) + '</div>' +
-    '<div class="col-md-1">' + data[1].stock_exchange + '</div>' +
-    '<div class="col-md-1">' + get_beta(data) + '</div>' +
-    '<div class="col-md-1">' + get_pe(data) + '</div>' +
-    '<div class="col-md-1">' + get_roe(data) + '</div>' +
-    '<div class="col-md-1">' + get_current_ratio(data) + '</div>'
+
+    template = template + '<div class="col-md-1">' + (i + 1) + '</div>' +
+      '<div class="col-md-1">' + data[0] + '</div>';
+    for (var j = 0; j < filters.length; j++) {
+      template = template + '<div class="col-md-1">' + 
+        data_to_string(data, filters[j], units[j]) + '</div>';
+    }
     template = template + '</div></li>'
     appended = appended + template;
   }
@@ -226,47 +257,21 @@ function display_result(sanitized_data) {
   $(".result-list").append(appended);
 }
 
-function get_price(data) {
-  if (data[1].open_price != "na") {
-    return data[1].open_price + " USD";
+function data_to_string(data, filter, unit) {
+  if (data[1][filter] == "na" || data[1][filter] == "nm") {
+    return "-";
   }
-  return data[1].open_price;
-}
-
-function get_marketcap(data) {
-  if (data[1].marketcap != "nm") {
-    return (data[1].marketcap / 1000000000).toFixed(2) + "B";
+  if (filter == "country" || filter == "stock_exchange" || filter == "name" || filter == "sector") {
+    return data[1][filter];
   }
-  return data[1].marketcap;
-}
-
-function get_beta(data) {
-  if (data[1].beta != undefined) {
-    return data[1].beta.toFixed(2);
+  if (unit == "USD(mn)" || unit == "mn") {
+    return (data[1][filter] / 1000000).toFixed(2) + "M";
   }
-  if (data[1].three_yr_weekly_beta != undefined) {
-    return data[1].three_yr_weekly_beta.toFixed(2);
+  if (unit == "%") {
+    return (data[1][filter] * 100).toFixed(2) + "%";
   }
-  return "nm";
-}
-
-function get_pe(data) {
-  if (data[1].pricetoearnings != "nm") {
-    return data[1].pricetoearnings.toFixed(2);
+  if (unit == "x") {
+    return data[1][filter].toFixed(2) + "x";
   }
-  return data[1].pricetoearnings;
-}
-
-function get_roe(data) {
-  if (data[1].roe != "na") {
-    return (data[1].roe * 100).toFixed(2) + "%";
-  }
-  return data[1].roe;
-}
-
-function get_current_ratio(data) {
-  if (data[1].currentratio != "na") {
-    return (data[1].currentratio).toFixed(1);
-  }
-  return data[1].currentratio;
+  return data[1][filter];
 }
