@@ -1,3 +1,13 @@
+.btn-primary {
+  background-color: #fff;
+  color: #000;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #28a745;
+}
+
 .all-filters {
   margin-top: 30px;
 }
@@ -28,12 +38,15 @@
 
 
 .button-row {
+  display: inline-block;
   text-align: right;
-  margin-top: 20px;
+  margin-left: 50px;
+  /*margin-top: 20px;*/
 }
 
 .button-row button {
   width: 100px;
+
 }
 
 .input-label {
@@ -163,4 +176,12 @@
 
 .result-titles {
   justify-content: space-around;
+}
+
+.proceed-row {
+  text-align: right;
+}
+
+.search-ordering {
+  margin-top: 30px;
 }

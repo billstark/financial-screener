@@ -50,16 +50,16 @@
           Filters
         </div>
         <div class="card-body">
-          <div class="alert alert-info hidden">
+          <div class="alert alert-success hidden">
             <button type="button" class="close">
               <i class="fas fa-cross"></i>
             </button>
             <strong>Success!</strong> Indicates a successful or positive action.
           </div>
           <div class="row title-row">
-            <div class="col-md-4 filter-group-title">Share Information</div>
-            <div class="col-md-4 filter-group-title">Fundamentals</div>
-            <div class="col-md-4 filter-group-title">Valuation</div>
+            <div class="col-md-4 filter-group-title"><b>Share Information</b></div>
+            <div class="col-md-4 filter-group-title"><b>Fundamentals</b></div>
+            <div class="col-md-4 filter-group-title"><b>Valuation</b></div>
           </div>
 
           <div class="row">
@@ -94,8 +94,33 @@
             </div>
           </div>
           <ul class="list-group list-group-flush filter-list"></ul>
-          <div class="button-row">
-            <button type="button" class="btn btn-success filter-search-btn">NEXT</button>
+        </div>
+      </div>
+
+      <div class="search-ordering card text-white bg-dark">
+        <div class="card-header">
+          Result Ordering
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <select class="filter-order form-control">
+                <option value="">Please choose a filter</option>
+              </select>
+            </div>
+            <div class="col-md-8 proceed-row">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline1">Ascending order</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline2">Descending order</label>
+              </div>
+              <div class="button-row">
+                <button type="button" class="btn btn-success filter-search-btn">NEXT</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

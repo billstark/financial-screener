@@ -24,12 +24,20 @@ function hide(element) {
 
 $(".filter-search-btn").click(function() {
   var data = get_data();
+  var order = "asc";
+  var initial_url = SCREENER_END_POINT + data[0];
   hide($(".search-result"));
   hide($(".no-result"));
   display($(".spinner"));
+  if ($(".filter-order").val() != "") {
+    if ($("#customRadioInline2").prop("checked") == true) {
+      order = "desc";
+    }
+    initial_url = initial_url + "&order_column=" + $(".filter-order").val() + "&order_direction=" + order;
+  }
   $.ajax({
     type: "GET",
-    url: SCREENER_END_POINT + data[0] + "&page_size=15",
+    url: initial_url + "&page_size=15",
 
     beforeSend: function (xhr) {
       xhr.setRequestHeader ("Authorization", "Basic " + btoa(USER_NAME + ":" + PASS_WORD));
@@ -129,6 +137,7 @@ function append_numerical_filter(super_container, filter_tag, filter_name, filte
   super_container.append(template);
   super_container.find(".btn-danger").click(function() {
     $($(this).parents(".filter-list-item")[0]).remove();
+    remove_ordering(filter_tag);
   });
 }
 
@@ -164,6 +173,7 @@ function append_selection_filter(super_container, filter_tag, filter_name) {
   super_container.append(template);
   super_container.find(".btn-danger").click(function() {
     $($(this).parents(".filter-list-item")[0]).remove();
+    remove_ordering(filter_tag);
   });
 }
 
